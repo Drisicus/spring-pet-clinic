@@ -14,7 +14,7 @@
     </parent>
     <groupId>es.springwebapp</groupId>
     <artifactId>spring-pet-clinic</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>spring-pet-clinic</name>
     <description>Spring Framework Pet Clinic Example</description>
 
@@ -38,9 +38,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <scm>
-        <developerConnection>scm:git:git@github.com:Drisicus/spring-pet-clinic.git</developerConnection>
-        <tag>HEAD</tag>
-    </scm>
 </project>
