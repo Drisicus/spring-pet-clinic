@@ -1,14 +1,26 @@
 package es.springwebapp.springpetclinic.services.map;
 
+import java.util.Objects;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
 import es.springwebapp.springpetclinic.model.Owner;
+import es.springwebapp.springpetclinic.model.Pet;
 import es.springwebapp.springpetclinic.services.OwnerService;
+import es.springwebapp.springpetclinic.services.PetService;
+import es.springwebapp.springpetclinic.services.PetTypeService;
 
 @Service
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
+
+    private final PetTypeService petTypeService;
+    private final PetService petService;
+
+    public OwnerServiceMap(PetTypeService petTypeService, PetService petService) {
+        this.petTypeService = petTypeService;
+        this.petService = petService;
+    }
 
     @Override
     public Set<Owner> findAll() {
@@ -22,7 +34,23 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Owner save(Owner object) {
-        return super.save(object);
+        Owner owner = null;
+        if(Objects.nonNull(object)) {
+            object.getPets().forEach(pet -> {
+                boolean petHasPetType = Objects.nonNull(pet.getPetType());
+                if (petHasPetType && Objects.isNull(pet.getPetType().getId())) {
+                    pet.setPetType(petTypeService.save(pet.getPetType()));
+                } else if (!petHasPetType) {
+                    throw new RuntimeException("Pet requires a PetType");
+                }
+                if (Objects.isNull(pet.getId())) {
+                    Pet savedPet = petService.save(pet);
+                    pet.setId(savedPet.getId());
+                }
+            });
+            owner = super.save(object);
+        }
+        return owner;
     }
 
     @Override
