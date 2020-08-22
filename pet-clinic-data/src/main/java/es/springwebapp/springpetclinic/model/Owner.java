@@ -1,18 +1,14 @@
 package es.springwebapp.springpetclinic.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -40,6 +36,6 @@ public class Owner extends Person {
         this.address = address;
         this.city = city;
         this.telephone = telephone;
-        this.pets = pets;
+        Optional.ofNullable(pets).ifPresent(petsSet -> this.pets = pets);
     }
 }
