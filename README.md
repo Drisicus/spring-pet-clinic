@@ -1,4 +1,4 @@
 # spring-pet-clinic
 Spring Framework Pet Clinic Example
 
-All commits are made by Drisicus but because they were made from different machines where the github user was configured for other people, there are more than one contributors.
+[![<CircleCI>](https://circleci.com/gh/Drisicus/spring-pet-clinic.svg?style=svg)](https://circleci.com/gh/Drisicus/spring-pet-clinic)
