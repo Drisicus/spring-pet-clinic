@@ -1,17 +1,16 @@
 package es.springwebapp.springpetclinic.services.springDataJPA;
 
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Service;
-
 import es.springwebapp.springpetclinic.model.Owner;
 import es.springwebapp.springpetclinic.repositories.OwnerRepository;
 import es.springwebapp.springpetclinic.repositories.PetRepository;
 import es.springwebapp.springpetclinic.repositories.PetTypeRepository;
 import es.springwebapp.springpetclinic.services.OwnerService;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 @Profile("springdatajpa")
@@ -30,6 +29,11 @@ public class OwnerSDService implements OwnerService {
     @Override
     public Owner findByLastName(String lastName) {
         return ownerRepository.findByLastName(lastName);
+    }
+
+    @Override
+    public Set<Owner> findAllByLastNameLike(String lastName) {
+        return ownerRepository.findAllByLastNameLike(lastName);
     }
 
     @Override
