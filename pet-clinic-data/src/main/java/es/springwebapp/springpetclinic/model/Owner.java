@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -38,4 +39,14 @@ public class Owner extends Person {
         this.telephone = telephone;
         Optional.ofNullable(pets).ifPresent(petsSet -> this.pets = pets);
     }
+
+    public Pet getPet(String name){
+        return getPet(name, false);
+    }
+
+    public Pet getPet(String name, boolean ignoreNew){
+        return pets.stream().filter(pet -> (!pet.isNew() || ignoreNew) &&
+                Objects.equals(pet.getName(), name.toLowerCase())).findFirst().orElse(null);
+    }
+
 }

@@ -1,13 +1,12 @@
 package es.springwebapp.springpetclinic.services.map;
 
-import java.util.Objects;
-import java.util.Set;
-
+import es.springwebapp.springpetclinic.model.Visit;
+import es.springwebapp.springpetclinic.services.VisitService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import es.springwebapp.springpetclinic.model.Visit;
-import es.springwebapp.springpetclinic.services.VisitService;
+import java.util.Objects;
+import java.util.Set;
 
 @Service
 @Profile({"default", "map"})
@@ -32,7 +31,7 @@ public class VisitServiceMap extends AbstractMapService<Visit, Long> implements 
         boolean invalidVisit = Objects.isNull(visit.getPet()) || Objects.isNull(visit.getPet().getOwner())
                 || Objects.isNull(visit.getPet().getId()) || Objects.isNull(visit.getPet().getOwner().getId());
 
-        if(!invalidVisit){
+        if(invalidVisit){
             throw new RuntimeException("Invalid Visit");
         }
         return super.save(visit);

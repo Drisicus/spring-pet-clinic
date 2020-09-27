@@ -1,21 +1,11 @@
 package es.springwebapp.springpetclinic.bootstrap;
 
-import java.time.LocalDate;
-
+import es.springwebapp.springpetclinic.model.*;
+import es.springwebapp.springpetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import es.springwebapp.springpetclinic.model.Owner;
-import es.springwebapp.springpetclinic.model.Pet;
-import es.springwebapp.springpetclinic.model.PetType;
-import es.springwebapp.springpetclinic.model.Specialty;
-import es.springwebapp.springpetclinic.model.Vet;
-import es.springwebapp.springpetclinic.model.Visit;
-import es.springwebapp.springpetclinic.services.OwnerService;
-import es.springwebapp.springpetclinic.services.PetTypeService;
-import es.springwebapp.springpetclinic.services.SpecialtyService;
-import es.springwebapp.springpetclinic.services.VetService;
-import es.springwebapp.springpetclinic.services.VisitService;
+import java.time.LocalDate;
 
 @Component
 public class DataLoader implements CommandLineRunner {

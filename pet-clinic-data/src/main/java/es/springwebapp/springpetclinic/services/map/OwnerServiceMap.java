@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -73,7 +74,8 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Set<Owner> findAllByLastNameLike(String lastName) {
-        return findAll().stream().filter(owner -> owner.getLastName().contains(lastName)).collect(Collectors.toSet());
+        Pattern pattern = Pattern.compile(lastName.replace("%", ".*"));
+        return findAll().stream().filter(owner -> pattern.matcher(owner.getLastName()).matches()).collect(Collectors.toSet());
     }
 
 }
